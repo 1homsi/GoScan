@@ -1,0 +1,51 @@
+.RegisterContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 800px;
+}
+
+.Name {
+    width: 80%;
+    margin-bottom: 10px;
+}
+
+.Email {
+    width: 80%;
+    margin-bottom: 10px;
+}
+
+.Password {
+    width: 80%;
+    margin-bottom: 10px;
+}
+
+.id {
+    width: 80%;
+    margin-bottom: 10px;
+}
+
+.Message {
+    width: 80%;
+    margin-bottom: 10px;
+}
+
+.Location{
+    width: 80%;
+    margin-bottom: 10px;
+    flex-direction: column;
+}
+
+.ButtonWidth {
+    width: 40%;
+}
+
+.Form {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

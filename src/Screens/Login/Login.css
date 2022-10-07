@@ -1,0 +1,29 @@
+.Logincontainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh
+}
+
+.Email {
+    width: 25%;
+    margin-bottom: 10px;
+}
+
+.Password {
+    width: 25%;
+    margin-bottom: 10px;
+}
+
+.ButtonWidth {
+    width: 10%;
+}
+
+.Form {
+    display: flex;
+    width: 100vw;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
