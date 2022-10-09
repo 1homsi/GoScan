@@ -1,12 +1,10 @@
 
 .item {
-    background-color: #dddde1    ;
-    border-radius: 10px;
-    width: 80%;
+    background-color: #dadadb    ;
+    border-radius: 18px;
+    width: 30%;
     height: 30%;
     padding: 10px;
-    padding-top: 15px;
-    padding-bottom: 15px;
     text-align: center;
     flex-direction: column;
     align-items: center;
@@ -16,5 +14,5 @@
 
 div > p {
     font-size: large;
-    font-weight: 700;
+    font-weight: 600;
 }

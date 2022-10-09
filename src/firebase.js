@@ -4,12 +4,12 @@ import 'firebase/compat/firestore';
 import 'firebase/compat/storage';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCrgKgGNK6WHAZ7qlqimwhJO3n2FYegWk0",
-    authDomain: "goscan-fda61.firebaseapp.com",
-    projectId: "goscan-fda61",
-    storageBucket: "goscan-fda61.appspot.com",
-    messagingSenderId: "323700568738",
-    appId: "1:323700568738:web:b43d98f92ef8121aefddfb"
+    apiKey: "AIzaSyBH50gcJAnS0O60mFNqu3RuNVNN3ZO34EI",
+    authDomain: "inventorydb-23174.firebaseapp.com",
+    projectId: "inventorydb-23174",
+    storageBucket: "inventorydb-23174.appspot.com",
+    messagingSenderId: "810381392343",
+    appId: "1:810381392343:web:1ca95b4f0912f7ae803392"
 };
 
 let app;
