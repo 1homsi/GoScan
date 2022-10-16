@@ -27,7 +27,7 @@ export default function NavBar({ navigate }) {
               navigate("/");
             }}
           >
-            Inventory System
+            GoScan
           </Typography>
           {auth.currentUser ? (
             <>
@@ -49,7 +49,16 @@ export default function NavBar({ navigate }) {
               </Button>
             </>
           ) : (
-            <></>
+            <>
+              <Button
+                color="inherit"
+                onClick={() => {
+                  navigate("/login");
+                }}
+              >
+                Login
+              </Button>
+            </>
           )}
         </Toolbar>
       </AppBar>

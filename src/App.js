@@ -25,11 +25,18 @@ export default function App() {
     <div>
       <NavBar navigate={navigate} />
       <Routes>
-        <Route index element={<Home navigate={navigate} user={user?.displayName} />} />
-        <Route path="/register" element={<Register navigate={navigate} />} />
+        <Route index element={<Intro navigate={navigate} />} />
+        <Route path="/shop/:id" element={<Home navigate={navigate} user={user?.displayName} />} />
         <Route path="/login" element={<Login navigate={navigate} />} />
+        {/* {
+          user &&
+            user.email === "homsimohamad17@gmail.com" ? (
+            <> */}
+        <Route path="/register" element={<Register navigate={navigate} />} />
+        {/* </>
+          ) : <></>
+        } */}
         <Route path="/add" element={<Add navigate={navigate} />} />
-        <Route path="/Intro" element={<Intro navigate={navigate} />} />
         <Route path="/edit/:id" element={<Edit navigate={navigate} />} />
       </Routes>
     </div>

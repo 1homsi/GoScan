@@ -1,5 +1,5 @@
 import React from "react";
-import { auth } from "../../firebase";
+import { auth, db } from "../../firebase";
 import { TextField, Button } from "@mui/material";
 import "./Register.css";
 
@@ -27,6 +27,10 @@ export default class Register extends React.Component {
       .then((e) => {
         e.user.updateProfile({
           displayName: this.state.name,
+        });
+        db.collection("Shops").doc(e.user.uid).set({
+          name: this.state.name,
+          email: this.state.email,
         });
       })
       .catch((error) => {

@@ -1,35 +1,40 @@
 import React from "react";
-import { Button } from "@mui/material";
-import { auth } from "../../firebase";
 
-export default class Intro extends React.Component {
-  componentDidMount() {
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        this.props.navigate("/");
-      }
-    });
-  }
-
-  render() {
-    return (
-      <div>
-        <h1>Inventory System</h1>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => this.props.navigate("/login")}
-        >
-          Login
-        </Button>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => this.props.navigate("/register")}
-        >
-          Register
-        </Button>
-      </div>
-    );
-  }
+export default function IntroPage() {
+  return (
+    <div
+      style={{
+        height: "93.5vh",
+        backgroundColor: "#d9dfe9",
+        marginTop: "6.5vh",
+      }}
+    >
+      <h2
+        style={{
+          paddingTop: "10%",
+        }}
+      >
+        <center>Welcome to GoScan</center>
+      </h2>
+      <p
+        style={{
+          fontSize: "1rem",
+          textAlign: "center",
+          color: "#2E3B55",
+          paddingTop: "10%",
+        }}
+      >
+        Scan Qr Code to access your specific shop
+      </p>
+      <p
+        style={{
+          fontSize: "0.7rem",
+          textAlign: "center",
+          color: "#2E3B55",
+        }}
+      >
+        Use your phone camera to scan the QR code
+      </p>
+    </div>
+  );
 }
