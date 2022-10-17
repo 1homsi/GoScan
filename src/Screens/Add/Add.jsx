@@ -8,11 +8,13 @@ export default class Add extends React.Component {
     super(props);
     this.state = {
       name: "",
-      price: 0,
+      priceInLBP: 0,
+      PriceInUSD: 0,
       quantity: 0,
       description: "",
       category: "",
       image: {},
+      barcode: "",
     };
     this.handleAdd = this.handleAdd.bind(this);
   }
@@ -60,6 +62,7 @@ export default class Add extends React.Component {
               marginTop: "10px",
             }}
           >
+            
             <TextField
               fullWidth
               label="Product Name"
@@ -79,17 +82,54 @@ export default class Add extends React.Component {
           >
             <TextField
               fullWidth
-              label="Price"
+              label="Product Code"
+              value={this.state.barcode}
+              onChange={(event) =>
+                this.setState({
+                  name: event.target.value,
+                })
+              }
+            />
+          </div>
+          <div
+            className="Price"
+            style={{
+              marginTop: "10px",
+            }}
+          >
+            <TextField
+              fullWidth
+              label="Price in LBP"
               type="number"
               defaultValue={0}
               value={this.state.price}
               onChange={(event) =>
                 this.setState({
-                  price: event.target.value,
+                  priceInLBP: event.target.value,
                 })
               }
             />
           </div>
+          <div
+            className="Price"
+            style={{
+              marginTop: "10px",
+            }}
+          >
+            <TextField
+              fullWidth
+              label="Price in USD (Optional) "
+              type="number"
+              defaultValue={0}
+              value={this.state.price}
+              onChange={(event) =>
+                this.setState({
+                  PriceInUSD: event.target.value,
+                })
+              }
+            />
+          </div>
+          
           <div
             className="Quantity"
             style={{
@@ -110,6 +150,7 @@ export default class Add extends React.Component {
           </div>
           <div
             className="Description"
+            multiline
             style={{
               marginTop: "10px",
             }}
@@ -131,7 +172,7 @@ export default class Add extends React.Component {
               marginTop: "10px",
             }}
           >
-            <select
+            {/* <select
               name="category"
               value={this.state.category}
               onChange={(event) => {
@@ -144,7 +185,7 @@ export default class Add extends React.Component {
               <option value="electronics">electronics</option>
               <option value="jewelery">jewelery</option>
               <option value="clothing">clothing</option>
-            </select>
+            </select> */}
           </div>
           <div
             className="Category"
@@ -160,6 +201,7 @@ export default class Add extends React.Component {
                 });
               }}
             />
+            (optional)
           </div>
           <div
             style={{

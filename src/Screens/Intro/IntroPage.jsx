@@ -35,6 +35,31 @@ export default function IntroPage() {
       >
         Use your phone camera to scan the QR code
       </p>
+      {/* {window.innerWidth < 600 ? (
+        <button
+          style={{
+            backgroundColor: "#2E3B55",
+            color: "#fff",
+            padding: "10px 20px",
+            border: "none",
+            borderRadius: "5px",
+            marginTop: "10%",
+            marginLeft: "auto",
+            marginRight: "auto",
+            display: "block",
+
+
+          }}
+
+          onClick={() => {
+            window.location.href = "https://goqr.me/";
+          }}
+        >
+          Open Camera
+        </button>
+      ) : (
+        ""
+      )} */}
     </div>
   );
 }
