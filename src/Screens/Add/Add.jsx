@@ -33,11 +33,13 @@ export default class Add extends React.Component {
       () => {
         uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
           console.log(downloadURL);
-          db.collection("Items")
+          db.collection("Shops")
+            .doc(auth.currentUser.uid)
+            .collection("Items")
             .doc()
             .set({
               name: name,
-              price: price,
+              price: 0,
               quantity: quantity,
               description: description,
               category: category,
@@ -45,7 +47,7 @@ export default class Add extends React.Component {
               user: auth.currentUser.uid,
             })
             .then(() => {
-              this.props.navigate("/");
+              this.props.location.href = "/home";
             });
         });
       }
@@ -62,7 +64,6 @@ export default class Add extends React.Component {
               marginTop: "10px",
             }}
           >
-            
             <TextField
               fullWidth
               label="Product Name"
@@ -129,7 +130,7 @@ export default class Add extends React.Component {
               }
             />
           </div>
-          
+
           <div
             className="Quantity"
             style={{
@@ -150,7 +151,6 @@ export default class Add extends React.Component {
           </div>
           <div
             className="Description"
-            multiline
             style={{
               marginTop: "10px",
             }}

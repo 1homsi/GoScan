@@ -20,7 +20,7 @@ export default function Item({ item }) {
         </div>
       </div>
 
-      <Button
+      {/* <Button
         onClick={() => {
           navigate(`/edit/${item.id}`);
         }}
@@ -40,7 +40,7 @@ export default function Item({ item }) {
         }}
       >
         Delete
-      </Button>
+      </Button> */}
     </div>
   );
 }

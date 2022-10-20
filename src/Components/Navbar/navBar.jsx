@@ -3,6 +3,17 @@ import { AppBar, Toolbar, Typography, Box, Button } from "@mui/material";
 import { auth } from "../../firebase";
 
 export default function NavBar({ navigate }) {
+  const [isUserLoggedIn, setIsUserLoggedIn] = React.useState(false);
+  React.useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        setIsUserLoggedIn(true);
+      } else {
+        setIsUserLoggedIn(false);
+      }
+    });
+  }, []);
+
   const handleLogOut = () => {
     auth.signOut().then(() => {
       navigate("/Intro");
@@ -29,7 +40,7 @@ export default function NavBar({ navigate }) {
           >
             GoScan
           </Typography>
-          {auth.currentUser ? (
+          {isUserLoggedIn ? (
             <>
               <Button
                 color="inherit"

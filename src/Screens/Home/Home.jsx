@@ -1,143 +1,104 @@
 import React from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import Item from "../../Components/item/Item";
 import { db, auth } from "../../firebase";
 import "./Home.css";
 
-export default class Home extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      empty: false,
-      loading: true,
-      items: [],
-      filteredItems: [],
-    };
-  }
+export default function Home() {
+  const navigation = useNavigate();
+  const { id } = useParams();
+  const [items, setItems] = React.useState([]);
+  const [empty, setEmpty] = React.useState(false);
+  const [loading, setLoading] = React.useState(true);
+  const [filteredItems, setFilteredItems] = React.useState([]);
 
-  componentDidMount() {
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        this.props.navigate("/");
-        this.fetchData();
-      } else {
-        this.setState({ items: [], loading: true });
-      }
-    });
-  }
+  React.useEffect(() => {
+    fetchData();
+  });
 
-  componentWillUnmount() {
-    this.setState({
-      loading: true,
-      items: [],
-    });
-  }
-
-  fetchData = () => {
-    this.setState({ items: [] });
-    db.collection("Items")
-      .where("user", "==", auth.currentUser?.uid)
+  const fetchData = () => {
+    setItems([]);
+    db.collection("Shops")
+      .doc(id)
+      .collection("Items")
       .get()
       .then((snapshot) => {
         if (!snapshot.empty) {
           let item = [];
-          this.setState({ empty: false });
+          setEmpty(false);
           snapshot.forEach((doc) => {
             let data = Object.assign({ id: doc.id }, doc.data());
             item.push(data);
           });
-          this.setState({
-            items: item,
-            filteredItems: item,
-          });
+          setItems(item);
+          setFilteredItems(item);
         } else {
-          this.setState({ empty: true });
+          setEmpty(true);
         }
-        this.setState({ loading: false });
+        setLoading(false);
       });
   };
 
-  setFilteredItems = (category) => {
-    let filteredItems = this.state.items.filter((item) => {
-      return item.category === category;
-    });
-    this.setState({ filteredItems });
-  };
+  // const EditFilteredItems = (category) => {
+  //   let filteredItems = items.filter((item) => {
+  //     return item.category === category;
+  //   });
+  //   setFilteredItems(filteredItems);
+  // };
 
-  render() {
-    if (auth.currentUser) {
-      if (this.state.loading) {
-        return (
-          <div className="main">
-            <h2
-              style={{
-                marginTop: "10%",
-              }}
-            >
-              <center>Loading...</center>
-            </h2>
-          </div>
-        );
-      } else {
-        if (this.state.empty) {
+  return (
+    // <div className="main">
+    //   <center>
+    //     <h1>No Items</h1>
+    //   </center>
+    // </div>
+
+    <div className="main">
+      <center>
+        {/* <div className="buttons d-flex justify-content-center mb-5 pb-5">
+          <button
+            className="button btn btn-outline-dark me-2"
+            onClick={() =>
+              this.setState({
+                filteredItems: this.state.items,
+              })
+            }
+          >
+            All
+          </button>
+          <button
+            className="button btn btn-outline-dark me-2"
+            onClick={() => {
+              this.setFilteredItems("electronics");
+            }}
+          >
+            electronics
+          </button>
+          <button
+            className="button btn btn-outline-dark me-2"
+            onClick={() => {
+              this.setFilteredItems("jewelery");
+            }}
+          >
+            jewelery
+          </button>
+          <button
+            className="button btn btn-outline-dark me-2"
+            onClick={() => {
+              this.setFilteredItems("clothing");
+            }}
+          >
+            clothing
+          </button>
+        </div> */}
+        {filteredItems.map((item, index) => {
           return (
-            <div className="main">
-              <center>
-                <h1>No Items</h1>
-              </center>
+            <div key={index}>
+              <Item item={item} />
             </div>
           );
-        } else {
-          return (
-            <div className="main">
-              <center>
-                <div className="buttons d-flex justify-content-center mb-5 pb-5">
-                  <button
-                    className="button btn btn-outline-dark me-2"
-                    onClick={() =>
-                      this.setState({
-                        filteredItems: this.state.items,
-                      })
-                    }
-                  >
-                    All
-                  </button>
-                  <button
-                    className="button btn btn-outline-dark me-2"
-                    onClick={() => {
-                      this.setFilteredItems("electronics");
-                    }}
-                  >
-                    electronics
-                  </button>
-                  <button
-                    className="button btn btn-outline-dark me-2"
-                    onClick={() => {
-                      this.setFilteredItems("jewelery");
-                    }}
-                  >
-                    jewelery
-                  </button>
-                  <button
-                    className="button btn btn-outline-dark me-2"
-                    onClick={() => {
-                      this.setFilteredItems("clothing");
-                    }}
-                  >
-                    clothing
-                  </button>
-                </div>
-                {this.state.filteredItems.map((item, index) => {
-                  return (
-                    <div key={index}>
-                      <Item item={item} />
-                    </div>
-                  );
-                })}
-              </center>
-            </div>
-          );
-        }
-      }
-    }
-  }
+        })}
+      </center>
+    </div>
+  );
 }
