@@ -16,7 +16,7 @@ export default function NavBar({ navigate }) {
 
   const handleLogOut = () => {
     auth.signOut().then(() => {
-      navigate("/Intro");
+      navigate("/");
     });
   };
 
@@ -49,6 +49,14 @@ export default function NavBar({ navigate }) {
                 }}
               >
                 Add
+              </Button>
+              <Button
+                color="inherit"
+                onClick={() => {
+                  navigate("/add");
+                }}
+              >
+                My Products
               </Button>
               <Button
                 color="inherit"
