@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useParams } from "react-router";
-import { db } from "../../firebase";
+import { db, auth } from "../../firebase";
 import { TextField, Button } from "@mui/material";
 import "../Add/Add.css";
 
@@ -13,7 +13,9 @@ export default function Edit({ navigate }) {
   const [quantity, setQuantity] = useState();
 
   React.useEffect(() => {
-    db.collection("Items")
+    db.collection("Shops")
+      .doc(auth.currentUser.uid)
+      .collection("Items")
       .doc(id)
       .get()
       .then((doc) => {
@@ -25,12 +27,16 @@ export default function Edit({ navigate }) {
   });
 
   const handleUpdate = () => {
-    db.collection("Items").doc(id).update({
-      name: name,
-      price: price,
-      description: description,
-      quantity: quantity,
-    });
+    db.collection("Shops")
+      .doc(auth.currentUser.uid)
+      .collection("Items")
+      .doc(id)
+      .update({
+        name: name,
+        price: price,
+        description: description,
+        quantity: quantity,
+      });
     navigate("/");
   };
 
@@ -49,7 +55,6 @@ export default function Edit({ navigate }) {
             label="Product Name"
             value={name}
             onChange={(event) => {
-              console.log(event.target.value);
               setName(event.target.value);
             }}
           />

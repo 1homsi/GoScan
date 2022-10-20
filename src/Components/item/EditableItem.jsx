@@ -2,9 +2,9 @@ import { Button } from "@mui/material";
 import React from "react";
 import "./Item.css";
 import { useNavigate } from "react-router-dom";
-import { db } from "../../firebase";
+import { db, auth } from "../../firebase";
 
-export default function Item({ item }) {
+export default function EditItem({ item }) {
   let navigate = useNavigate();
 
   return (
@@ -30,8 +30,9 @@ export default function Item({ item }) {
       <Button
         color="error"
         onClick={() => {
-          console.log(item.id);
-          db.collection("Items")
+          db.collection("Shops")
+            .doc(auth.currentUser.uid)
+            .collection("Items")
             .doc(item.id)
             .delete()
             .then(() => {

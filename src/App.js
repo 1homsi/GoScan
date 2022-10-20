@@ -15,6 +15,7 @@ import Login from "./Screens/Login/Login";
 import Register from "./Screens/Register/Register";
 import Add from "./Screens/Add/Add";
 import Edit from "./Screens/Edit/Edit";
+import MyProd from "./Screens/MyProducts/MyProd";
 
 
 export default function App() {
@@ -28,6 +29,7 @@ export default function App() {
         <Route index element={<Intro navigate={navigate} />} />
         <Route path="/shop/:id" element={<Home navigate={navigate} user={user?.displayName} />} />
         <Route path="/login" element={<Login navigate={navigate} />} />
+        <Route path="/myitems" element={<MyProd navigate={navigate} />} />
         {/* {
           user &&
             user.email === "homsimohamad17@gmail.com" ? (
