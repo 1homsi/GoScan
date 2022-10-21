@@ -1,0 +1,16 @@
+.Container{
+    display: grid;
+	place-items: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+
+/* make Scanner responsive*/
+@media screen and (max-width: 600px) {
+    .Scanner {
+        grid-template-columns: 1fr ;
+        grid-template-rows: 1fr;
+        grid-template-areas: "top" "bottom";
+    }
+}

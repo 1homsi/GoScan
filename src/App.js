@@ -1,12 +1,7 @@
 import React from "react";
-import {
-  Routes,
-  Route,
-  useNavigate
-} from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import NavBar from "./Components/Navbar/navBar";
 import { auth } from "./firebase";
-
 
 //Screen imports
 import Home from "./Screens/Home/Home";
@@ -16,7 +11,7 @@ import Register from "./Screens/Register/Register";
 import Add from "./Screens/Add/Add";
 import Edit from "./Screens/Edit/Edit";
 import MyProd from "./Screens/MyProducts/MyProd";
-
+import Scan from "./Screens/Scanner/scan";
 
 export default function App() {
   let navigate = useNavigate();
@@ -26,8 +21,11 @@ export default function App() {
     <div>
       <NavBar navigate={navigate} />
       <Routes>
-        <Route index element={<Intro navigate={navigate} />} />
-        <Route path="/shop/:id" element={<Home navigate={navigate} user={user?.displayName} />} />
+        {/* <Route index element={<Intro navigate={navigate} />} /> */}
+        <Route
+          path="/shop/:id"
+          element={<Home navigate={navigate} user={user?.displayName} />}
+        />
         <Route path="/login" element={<Login navigate={navigate} />} />
         <Route path="/myitems" element={<MyProd navigate={navigate} />} />
         {/* {
@@ -40,8 +38,8 @@ export default function App() {
         } */}
         <Route path="/add" element={<Add navigate={navigate} />} />
         <Route path="/edit/:id" element={<Edit navigate={navigate} />} />
+        <Route index element={<Scan navigate={navigate} />} />
       </Routes>
     </div>
   );
 }
-

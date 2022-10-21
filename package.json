@@ -14,9 +14,11 @@
     "firebase": "^9.9.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-qr-barcode-scanner": "^1.0.6",
     "react-qr-reader": "^3.0.0-beta-1",
     "react-router-dom": "6",
     "react-scripts": "5.0.1",
+    "scanbot-web-sdk": "^2.9.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
