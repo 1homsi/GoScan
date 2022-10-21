@@ -20,7 +20,7 @@ export default class Add extends React.Component {
   }
 
   handleAdd() {
-    const { name, price, quantity, description, category } = this.state;
+    const { name, priceInLBP, PriceInUSD , quantity, description, category } = this.state;
     const uploadTask = storage
       .ref(`/images/${this.state.image.name}`)
       .put(this.state.image);
@@ -39,7 +39,8 @@ export default class Add extends React.Component {
             .doc()
             .set({
               name: name,
-              price: 0,
+              priceInLBP: priceInLBP,
+              PriceInUSD: PriceInUSD, 
               quantity: quantity,
               description: description,
               category: category,

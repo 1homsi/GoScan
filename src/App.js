@@ -21,7 +21,7 @@ export default function App() {
     <div>
       <NavBar navigate={navigate} />
       <Routes>
-        {/* <Route index element={<Intro navigate={navigate} />} /> */}
+        <Route index element={<Intro navigate={navigate} />} />
         <Route
           path="/shop/:id"
           element={<Home navigate={navigate} user={user?.displayName} />}
@@ -38,7 +38,7 @@ export default function App() {
         } */}
         <Route path="/add" element={<Add navigate={navigate} />} />
         <Route path="/edit/:id" element={<Edit navigate={navigate} />} />
-        <Route index element={<Scan navigate={navigate} />} />
+        <Route path="/scan" element={<Scan navigate={navigate} />} />
       </Routes>
     </div>
   );

@@ -87,7 +87,7 @@ class Scan extends Component {
       >
         <div
           id='barcode-scanner-view'
-          style={{ height: "70%", width: "70%", justifySelf: "center" }}
+          style={{ height: "70%", width: "100%", justifySelf: "center" }}
             className='Scanner'
             >
         </div>
