@@ -14,7 +14,7 @@ export default class Add extends React.Component {
       description: "",
       category: "",
       image: {},
-      barcode: "",
+      barcode: 0,
     };
     this.handleAdd = this.handleAdd.bind(this);
   }
@@ -40,7 +40,7 @@ export default class Add extends React.Component {
             .set({
               name: name,
               priceInLBP: priceInLBP,
-              PriceInUSD: PriceInUSD, 
+              PriceInUSD: PriceInUSD,  
               quantity: quantity,
               description: description,
               category: category,
@@ -48,7 +48,7 @@ export default class Add extends React.Component {
               user: auth.currentUser.uid,
             })
             .then(() => {
-              this.props.location.href = "/home";
+              window.location.href = "/";
             });
         });
       }
@@ -57,7 +57,7 @@ export default class Add extends React.Component {
   render() {
     return (
       <div className="AddContainer">
-        <h1>Add</h1>
+        <h1>Add Product</h1>
         <form className="Form">
           <div
             className="Name"
@@ -85,10 +85,11 @@ export default class Add extends React.Component {
             <TextField
               fullWidth
               label="Product Code"
+              type={"number"}
               value={this.state.barcode}
               onChange={(event) =>
                 this.setState({
-                  name: event.target.value,
+                  barcode: event.target.value,
                 })
               }
             />
@@ -104,7 +105,7 @@ export default class Add extends React.Component {
               label="Price in LBP"
               type="number"
               defaultValue={0}
-              value={this.state.price}
+              value={this.state.priceInLBP}
               onChange={(event) =>
                 this.setState({
                   priceInLBP: event.target.value,
@@ -123,7 +124,7 @@ export default class Add extends React.Component {
               label="Price in USD (Optional) "
               type="number"
               defaultValue={0}
-              value={this.state.price}
+              value={this.state.PriceInUSD}
               onChange={(event) =>
                 this.setState({
                   PriceInUSD: event.target.value,

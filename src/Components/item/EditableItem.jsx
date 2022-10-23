@@ -10,7 +10,7 @@ export default function EditItem({ item }) {
   return (
     <div className="item">
       <div>
-        <img src={item.image} alt="item" width={100} height={100} />
+        <img src={item.image} alt={item.title} width={100} height={100} />
         <div>
           <p>Title: {item.name}</p>
           <p>Price: {item.price}</p>

@@ -16,7 +16,7 @@ export default function NavBar({ navigate }) {
 
   const handleLogOut = () => {
     auth.signOut().then(() => {
-      navigate("/");
+      window.location.href = "/";
     });
   };
 

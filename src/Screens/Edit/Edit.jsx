@@ -37,7 +37,7 @@ export default function Edit({ navigate }) {
         description: description,
         quantity: quantity,
       });
-    navigate("/");
+    window.location.href = "/myitems";
   };
 
   return (
