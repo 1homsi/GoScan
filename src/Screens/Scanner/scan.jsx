@@ -1,107 +1,142 @@
-import React, { Component } from 'react'
+import React, { useEffect, useRef, useState } from 'react';
+import Quagga from 'quagga';
 import "./scan.css"
-// import BarcodeScannerComponent from "react-qr-barcode-scanner";
-import ScanbotSDK from 'scanbot-web-sdk/webpack'
 
+const App = (props) => {
 
+  const firstUpdate = useRef(true);
+  const [isStart, setIsStart] = useState(false);
+  const [barcode, setBarcode] = useState('');
 
-
-class Scan extends Component {
-    barcodes = [];
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      lastBarcode: null,
-    }
-  }
-
-  async componentDidMount() {
-    this.sdk = await ScanbotSDK.initialize({
-      licenseKey: '',
-      engine: "/",
-    });
-
-    const config = {
-      onBarcodesDetected: this.onBarcodesDetected.bind(this),
-      containerId: 'barcode-scanner-view',
-      style: {
-        window: {
-          aspectRatio: 2,
-          paddingPropLeft: 0.7,
-        },
-      },
-      barcodeFormat: [
-        "AZTEC",
-        "CODABAR",
-        "CODE_39",
-        "CODE_93",
-        "CODE_128",
-        "DATA_MATRIX",
-        "EAN_8",
-        "EAN_13",
-        "ITF",
-        "MAXICODE",
-        "PDF_417",
-        "QR_CODE",
-        "RSS_14",
-        "RSS_EXPANDED",
-        "UPC_A",
-        "UPC_E",
-        "UPC_EAN_EXTENSION",
-        "MSI_PLESSEY"
-      ]
+  useEffect(() => {
+    return () => {
+      if (isStart) stopScanner();
     };
+  }, []);
 
-    this.barcodeScanner = await this.sdk.createBarcodeScanner(config);
+  useEffect(() => {
 
-  }
-
-  componentWillUnmount() {
-    this.barcodeScanner.disposebBarcodeScanner();
-  }
-
-
-  render() {
-    let barcodeText;
-    if (!this.state.lastBarcode) {
-      barcodeText = '';
-    } else {
-      const barcodes = this.state.lastBarcode.barcodes;
-      barcodeText = JSON.stringify(
-        barcodes.map((barcodes) => barcodes.text + " (" + barcodes.format + ") "));
+    if (firstUpdate.current) {
+      firstUpdate.current = false;
+      return;
     }
 
-    return (
-      <div
-      style={{
-        backgroundColor: "pink",
-        height: "100vh",
-        width: "100vw",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        flexDirection: "column",
-      }}
-      >
-        <div
-          id='barcode-scanner-view'
-          style={{ height: "70%", width: "100%", justifySelf: "center" }}
-            className='Scanner'
-            >
-        </div>
-        the thing is: {barcodeText}
-      </div>
-    );
-  }
+    if (isStart) startScanner();
+    else stopScanner();
+  }, [isStart]);
 
-  async onBarcodesDetected(result) {
-    this.barcodes.push(result);
-    this.setState({
-      lastBarcode: result
+  const _onDetected = res => {
+    // stopScanner();
+    setBarcode(res.codeResult.code);
+  };
+
+  const startScanner = () => {
+    Quagga.init(
+      {
+        inputStream: {
+          type: 'LiveStream',
+          target: document.querySelector('#scanner-container'),
+          constraints: {
+            facingMode: 'environment' // or user
+          }
+        },
+        numOfWorkers: navigator.hardwareConcurrency,
+        locate: true,
+        frequency: 1,
+        debug: {
+          drawBoundingBox: true,
+          showFrequency: true,
+          drawScanline: true,
+          showPattern: true
+        },
+        multiple: false,
+        locator: {
+          halfSample: false,
+          patchSize: 'large', // x-small, small, medium, large, x-large
+          debug: {
+            showCanvas: false,
+            showPatches: false,
+            showFoundPatches: false,
+            showSkeleton: false,
+            showLabels: false,
+            showPatchLabels: false,
+            showRemainingPatchLabels: false,
+            boxFromPatches: {
+              showTransformed: false,
+              showTransformedBox: false,
+              showBB: false
+            }
+          }
+        },
+        decoder: {
+          readers: [
+            'code_128_reader',
+            'ean_reader',
+            'ean_8_reader',
+            'code_39_reader',
+            'code_39_vin_reader',
+            'codabar_reader',
+            'upc_reader',
+            'upc_e_reader',
+            'i2of5_reader',
+            'i2of5_reader',
+            '2of5_reader',
+            'code_93_reader'
+          ]
+        }
+      },
+      err => {
+        if (err) {
+          return console.log(err);
+        }
+        Quagga.start();
+      }
+    );
+    Quagga.onDetected(_onDetected);
+    Quagga.onProcessed(result => {
+      let drawingCtx = Quagga.canvas.ctx.overlay,
+        drawingCanvas = Quagga.canvas.dom.overlay;
+
+      if (result) {
+        if (result.boxes) {
+          drawingCtx.clearRect(
+            0,
+            0,
+            parseInt(drawingCanvas.getAttribute('width')),
+            parseInt(drawingCanvas.getAttribute('height'))
+          );
+          result.boxes.filter(box => box !== result.box).forEach(box => {
+            Quagga.ImageDebug.drawPath(box, { x: 0, y: 1 }, drawingCtx, {
+              color: 'green',
+              lineWidth: 2
+            });
+          });
+        }
+
+        if (result.box) {
+          Quagga.ImageDebug.drawPath(result.box, { x: 0, y: 1 }, drawingCtx, { color: '#00F', lineWidth: 2 });
+        }
+
+        if (result.codeResult && result.codeResult.code) {
+          Quagga.ImageDebug.drawPath(result.line, { x: 'x', y: 'y' }, drawingCtx, { color: 'red', lineWidth: 3 });
+        }
+      }
     });
-  }
+  };
+
+  const stopScanner = () => {
+    Quagga.offProcessed();
+    Quagga.offDetected();
+    Quagga.stop();
+  };
+
+  return <div className="Container" >
+    <button className='btn' onClick={() => setIsStart(prevStart => !prevStart)} style={{ marginBottom: 20 }}>{isStart ? 'Stop' : 'Start'}</button>
+    {isStart && <React.Fragment>
+      <div id="scanner-container" />
+      <span>Barcode: {barcode}</span>
+    </React.Fragment>}
+  </div>
 }
 
-export default Scan;
+export default App;

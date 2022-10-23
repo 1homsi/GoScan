@@ -14,7 +14,7 @@ export default class Add extends React.Component {
       description: "",
       category: "",
       image: {},
-      barcode: 0,
+      barcode: "",
     };
     this.handleAdd = this.handleAdd.bind(this);
   }
@@ -85,7 +85,7 @@ export default class Add extends React.Component {
             <TextField
               fullWidth
               label="Product Code"
-              type={"number"}
+        
               value={this.state.barcode}
               onChange={(event) =>
                 this.setState({
