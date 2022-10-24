@@ -1,0 +1,21 @@
+{
+    "inputStream": {
+      "type": "LiveStream",
+      "constraints": {
+        "width": "98%",
+        "facingMode": "environment",
+        "aspectRatio": "2"
+      }
+    },
+    "locator": {
+      "patchSize": "medium",
+      "halfSample": true
+    },
+    "numOfWorkers": 2,
+    "frequency": 10,
+    "decoder": {
+      "readers": ["code_39_reader"]
+    },
+    "locate": true
+  }
+  
