@@ -53,7 +53,7 @@ export default function NavBar({ navigate }) {
               <Button
                 color="inherit"
                 onClick={() => {
-                  navigate("/myitems");
+                  navigate(`/myitems/${auth.currentUser.uid}`);
                 }}
               >
                 My Products

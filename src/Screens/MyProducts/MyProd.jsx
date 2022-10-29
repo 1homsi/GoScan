@@ -14,12 +14,13 @@ export default function MyProd() {
 
   React.useEffect(() => {
     fetchData();
-  });
+  }, []);
 
-  const fetchData = () => {
+  const fetchData = async () => {
     setItems([]);
-    db.collection("Shops")
-      .doc(auth.currentUser.uid)
+    await db
+      .collection("Shops")
+      .doc(id)
       .collection("Items")
       .get()
       .then((snapshot) => {

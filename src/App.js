@@ -27,7 +27,7 @@ export default function App() {
           element={<Home navigate={navigate} user={user?.displayName} />}
         />
         <Route path="/login" element={<Login navigate={navigate} />} />
-        <Route path="/myitems" element={<MyProd navigate={navigate} />} />
+        <Route path="/myitems/:id" element={<MyProd navigate={navigate} />} />
         {/* {
           user &&
             user.email === "homsimohamad17@gmail.com" ? (
