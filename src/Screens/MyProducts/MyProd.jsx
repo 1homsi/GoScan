@@ -44,7 +44,6 @@ export default function MyProd() {
     <div className="main">
       <center>
         <div>
-          {/* Search Bar */}
           <input
             type="text"
             placeholder="Search"
