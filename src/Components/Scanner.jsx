@@ -38,7 +38,7 @@ const Scanner = (props) => {
             .forEach(function (box) {
               Quagga.ImageDebug.drawPath(box, { x: 0, y: 1 }, drawingCtx, {
                 color: "green",
-                lineWidth: 2
+                lineWidth: 2,
               });
             });
         }
@@ -46,7 +46,7 @@ const Scanner = (props) => {
         if (result.box) {
           Quagga.ImageDebug.drawPath(result.box, { x: 0, y: 1 }, drawingCtx, {
             color: "#00F",
-            lineWidth: 2
+            lineWidth: 2,
           });
         }
         if (result.codeResult && result.codeResult.code) {

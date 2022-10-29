@@ -6,7 +6,6 @@ import "../Add/Add.css";
 
 export default function Edit({ navigate }) {
   const { id } = useParams();
-
   const [name, setName] = useState("");
   const [price, setPrice] = useState();
   const [description, setDescription] = useState("");
@@ -82,7 +81,7 @@ export default function Edit({ navigate }) {
           <TextField
             fullWidth
             label="Quantity"
-            type={"number"}
+            type="number"
             value={quantity}
             onChange={(event) => setQuantity(event.target.value)}
           />

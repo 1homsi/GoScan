@@ -57,6 +57,7 @@ export default function MyProd() {
             }}
           />
         </div>
+        <br />
         {filteredItems.map((item, index) => {
           return (
             <div key={index}>
