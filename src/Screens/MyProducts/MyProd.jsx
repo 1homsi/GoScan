@@ -43,6 +43,21 @@ export default function MyProd() {
   return (
     <div className="main">
       <center>
+        <div>
+          {/* Search Bar */}
+          <input
+            type="text"
+            placeholder="Search"
+            onChange={(e) => {
+              let value = e.target.value.toLowerCase();
+              let result = [];
+              result = items.filter((data) => {
+                return data.name.toLowerCase().search(value) != -1;
+              });
+              setFilteredItems(result);
+            }}
+          />
+        </div>
         {filteredItems.map((item, index) => {
           return (
             <div key={index}>
