@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { auth, db } from "../../firebase";
+import { db } from "../../firebase";
 import "./MyProd.css";
 import EditItem from "../../Components/item/EditableItem";
 
@@ -14,7 +14,7 @@ export default function MyProd() {
 
   React.useEffect(() => {
     fetchData();
-  }, []);
+  });
 
   const fetchData = async () => {
     setItems([]);
@@ -51,7 +51,7 @@ export default function MyProd() {
               let value = e.target.value.toLowerCase();
               let result = [];
               result = items.filter((data) => {
-                return data.name.toLowerCase().search(value) != -1;
+                return data.name.toLowerCase().search(value) !== -1;
               });
               setFilteredItems(result);
             }}

@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Item from "../../Components/item/Item";
-import { db, auth } from "../../firebase";
+import { db } from "../../firebase";
 import "./Home.css";
 
 export default function Home() {
@@ -16,9 +16,10 @@ export default function Home() {
     fetchData();
   });
 
-  const fetchData = () => {
+  const fetchData = async () => {
     setItems([]);
-    db.collection("Shops")
+    await db
+      .collection("Shops")
       .doc(id)
       .collection("Items")
       .get()
@@ -39,52 +40,23 @@ export default function Home() {
       });
   };
 
-  // const EditFilteredItems = (category) => {
-  //   let filteredItems = items.filter((item) => {
-  //     return item.category === category;
-  //   });
-  //   setFilteredItems(filteredItems);
-  // };
-
   return (
     <div className="main">
       <center>
-        {/* <div className="buttons d-flex justify-content-center mb-5 pb-5">
-          <button
-            className="button btn btn-outline-dark me-2"
-            onClick={() =>
-              this.setState({
-                filteredItems: this.state.items,
-              })
-            }
-          >
-            All
-          </button>
-          <button
-            className="button btn btn-outline-dark me-2"
-            onClick={() => {
-              this.setFilteredItems("electronics");
+        <div>
+          <input
+            type="text"
+            placeholder="Search"
+            onChange={(e) => {
+              let value = e.target.value.toLowerCase();
+              let result = [];
+              result = items.filter((data) => {
+                return data.name.toLowerCase().search(value) !== -1;
+              });
+              setFilteredItems(result);
             }}
-          >
-            electronics
-          </button>
-          <button
-            className="button btn btn-outline-dark me-2"
-            onClick={() => {
-              this.setFilteredItems("jewelery");
-            }}
-          >
-            jewelery
-          </button>
-          <button
-            className="button btn btn-outline-dark me-2"
-            onClick={() => {
-              this.setFilteredItems("clothing");
-            }}
-          >
-            clothing
-          </button>
-        </div> */}
+          />
+        </div>
         <div className="items">
           {filteredItems.map((item, index) => {
             return (

@@ -12,15 +12,13 @@ export default class Add extends React.Component {
       PriceInUSD: 0,
       quantity: 0,
       description: "",
-      category: "",
       image: {},
-      barcode: "",
     };
     this.handleAdd = this.handleAdd.bind(this);
   }
 
   handleAdd() {
-    const { name, barcode , priceInLBP, PriceInUSD , quantity, description, category } = this.state;
+    const { name, priceInLBP, PriceInUSD, quantity, description } = this.state;
     const uploadTask = storage
       .ref(`/images/${this.state.image.name}`)
       .put(this.state.image);
@@ -40,11 +38,9 @@ export default class Add extends React.Component {
             .set({
               name: name,
               priceInLBP: priceInLBP,
-              PriceInUSD: PriceInUSD,  
-              code: barcode,
+              price: PriceInUSD,
               quantity: quantity,
               description: description,
-              category: category,
               image: downloadURL,
               user: auth.currentUser.uid,
             })
@@ -67,6 +63,7 @@ export default class Add extends React.Component {
             }}
           >
             <TextField
+              required
               fullWidth
               label="Product Name"
               value={this.state.name}
@@ -84,34 +81,17 @@ export default class Add extends React.Component {
             }}
           >
             <TextField
-              fullWidth
-              label="Product Code"
-        
-              value={this.state.barcode}
-              onChange={(event) =>
-                this.setState({
-                  barcode: event.target.value,
-                })
-              }
-            />
-          </div>
-          <div
-            className="Price"
-            style={{
-              marginTop: "10px",
-            }}
-          >
-            <TextField
+              required
               fullWidth
               label="Price in LBP"
               type="number"
               defaultValue={0}
               value={this.state.priceInLBP}
-              onChange={(event) =>
+              onChange={(event) => {
                 this.setState({
-                  priceInLBP: event.target.value,
-                })
-              }
+                  priceInLBP: this.state.priceInLBP + 1000,
+                });
+              }}
             />
           </div>
           <div
@@ -121,8 +101,9 @@ export default class Add extends React.Component {
             }}
           >
             <TextField
+              required
               fullWidth
-              label="Price in USD (Optional) "
+              label="Price in USD"
               type="number"
               defaultValue={0}
               value={this.state.PriceInUSD}
@@ -141,6 +122,7 @@ export default class Add extends React.Component {
             }}
           >
             <TextField
+              required
               fullWidth
               label="Quantity"
               type="number"
@@ -159,6 +141,7 @@ export default class Add extends React.Component {
             }}
           >
             <TextField
+              required
               fullWidth
               label="Description"
               value={this.state.description}
@@ -197,6 +180,16 @@ export default class Add extends React.Component {
             }}
           >
             <input
+              required
+              style={{
+                marginTop: "20px",
+                padding: "10px",
+                background: "#5174bb",
+                color: "white",
+                border: "none",
+                borderRadius: "5px",
+                cursor: "pointer",
+              }}
               type={"file"}
               onChange={(event) => {
                 this.setState({
@@ -204,7 +197,6 @@ export default class Add extends React.Component {
                 });
               }}
             />
-            (optional)
           </div>
           <div
             style={{
