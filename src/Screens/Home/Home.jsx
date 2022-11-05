@@ -43,6 +43,22 @@ export default function Home() {
   return (
     <div className="main">
       <center>
+        <button
+          style={{
+            marginTop: "20px",
+            padding: "10px",
+            background: "#5174bb",
+            color: "white",
+            border: "none",
+            borderRadius: "5px",
+            cursor: "pointer",
+          }}
+          onClick={() => {
+            navigation(`/scan/${id}`);
+          }}
+        >
+          Scan Barcode
+        </button>
         <div>
           <input
             type="text"

@@ -11,8 +11,9 @@ import Register from "./Screens/Register/Register";
 import Add from "./Screens/Add/Add";
 import Edit from "./Screens/Edit/Edit";
 import MyProd from "./Screens/MyProducts/MyProd";
-import Scan from "./Screens/Scanner/scan";
 import BarcodeScreen from "./Screens/Barcode/Barcode";
+import ScannedItem from "./Screens/ScannedItem/ScannedItem";
+import Scan from "./Screens/Scan/Scan";
 
 export default function App() {
   let navigate = useNavigate();
@@ -29,6 +30,7 @@ export default function App() {
         />
         <Route path="/login" element={<Login navigate={navigate} />} />
         <Route path="/myitems/:id" element={<MyProd navigate={navigate} />} />
+        <Route path="/scanned/:shop/:id" element={<ScannedItem />} />
         <Route path="/barcode/:id" element={<BarcodeScreen />} />
         {/* {
           user &&
@@ -39,8 +41,8 @@ export default function App() {
           ) : <></>
         } */}
         <Route path="/add" element={<Add navigate={navigate} />} />
+        <Route path="/scan/:id" element={<Scan />} />
         <Route path="/edit/:id" element={<Edit navigate={navigate} />} />
-        <Route path="/scan" element={<Scan navigate={navigate} />} />
       </Routes>
     </div>
   );
