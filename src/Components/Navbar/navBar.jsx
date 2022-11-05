@@ -25,7 +25,7 @@ export default function NavBar({ navigate }) {
       <AppBar
         position="sticky"
         style={{
-          background: "#5174bb",
+          background: "#2C3639",
           position: "fixed",
         }}
       >

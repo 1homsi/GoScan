@@ -13,6 +13,8 @@ export default function EditItem({ item }) {
       style={{
         margin: 10,
         padding: 10,
+        backgroundColor: "#fff",
+        borderRadius: 10,
       }}
     >
       <div>

@@ -5,13 +5,14 @@ export default function IntroPage() {
     <div
       style={{
         height: "93.5vh",
-        backgroundColor: "#d9dfe9",
+        backgroundColor: "#414d4e",
         marginTop: "6.5vh",
       }}
     >
       <h2
         style={{
           paddingTop: "10%",
+          color: "#fff",
         }}
       >
         <center>Welcome to GoScan</center>
@@ -20,7 +21,7 @@ export default function IntroPage() {
         style={{
           fontSize: "1rem",
           textAlign: "center",
-          color: "#2E3B55",
+          color: "#fff",
           paddingTop: "10%",
         }}
       >
@@ -30,36 +31,11 @@ export default function IntroPage() {
         style={{
           fontSize: "0.7rem",
           textAlign: "center",
-          color: "#2E3B55",
+          color: "#fff",
         }}
       >
         Use your phone camera to scan the QR code
       </p>
-      {/* {window.innerWidth < 600 ? (
-        <button
-          style={{
-            backgroundColor: "#2E3B55",
-            color: "#fff",
-            padding: "10px 20px",
-            border: "none",
-            borderRadius: "5px",
-            marginTop: "10%",
-            marginLeft: "auto",
-            marginRight: "auto",
-            display: "block",
-
-
-          }}
-
-          onClick={() => {
-            window.location.href = "https://goqr.me/";
-          }}
-        >
-          Open Camera
-        </button>
-      ) : (
-        ""
-      )} */}
     </div>
   );
 }

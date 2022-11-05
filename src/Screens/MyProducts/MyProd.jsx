@@ -45,8 +45,18 @@ export default function MyProd() {
       <center>
         <div>
           <input
+            style={{
+              width: "80%",
+              height: 40,
+              borderRadius: 10,
+              border: "none",
+              outline: "none",
+              padding: 10,
+              fontSize: 20,
+              marginBottom: 20,
+            }}
             type="text"
-            placeholder="Search"
+            placeholder="Search..."
             onChange={(e) => {
               let value = e.target.value.toLowerCase();
               let result = [];
