@@ -1,8 +1,11 @@
 import React from "react";
 import BarcodeScannerComponent from "react-qr-barcode-scanner";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function Scan() {
+  const { id } = useParams();
   const [data, setData] = React.useState("Not Found");
+  const navigation = useNavigate();
 
   return (
     <div
@@ -17,11 +20,12 @@ export default function Scan() {
     >
       <BarcodeScannerComponent
         facingMode="environment"
-        width={100}
-        height={100}
+        width={500}
+        height={500}
         onUpdate={(err, result) => {
-          if (result) setData(result.text);
-          else setData("Not Found");
+          if (result) {
+            navigation(`/scanned/${id}/${result.text}`);
+          } else setData("Not Found");
         }}
       />
       <p>{data}</p>
