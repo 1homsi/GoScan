@@ -8,16 +8,19 @@ export default function EditItem({ item }) {
   let navigate = useNavigate();
 
   return (
-    <div className="item">
+    <div
+      className="itemEdit"
+      style={{
+        margin: 10,
+        padding: 10,
+      }}
+    >
       <div>
-        <img src={item.image} alt={item.title} width={100} height={100} />
-        <div>
-          <p>Title: {item.name}</p>
-          <p>Price: {item.price}</p>
-          <p>Quantity: {item.quantity}</p>
-          <p>Description: {item.description}</p>
-          <p>Category: {item.category}</p>
-        </div>
+        <img src={item.image} alt={item.title} className="imageItem" />
+        <h1>{item.name}</h1>
+        <p className="price">{item.price}$</p>
+        <p className="price">{item.priceInLBP}lbp</p>
+        <p>{item.description}</p>
       </div>
 
       <Button
@@ -26,6 +29,13 @@ export default function EditItem({ item }) {
         }}
       >
         Edit
+      </Button>
+      <Button
+        onClick={() => {
+          navigate(`/barcode/${item.id}`);
+        }}
+      >
+        Generate Barcode
       </Button>
       <Button
         color="error"

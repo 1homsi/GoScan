@@ -47,12 +47,6 @@ export default function Home() {
   // };
 
   return (
-    // <div className="main">
-    //   <center>
-    //     <h1>No Items</h1>
-    //   </center>
-    // </div>
-
     <div className="main">
       <center>
         {/* <div className="buttons d-flex justify-content-center mb-5 pb-5">
@@ -91,13 +85,15 @@ export default function Home() {
             clothing
           </button>
         </div> */}
-        {filteredItems.map((item, index) => {
-          return (
-            <div key={index}>
-              <Item item={item} />
-            </div>
-          );
-        })}
+        <div className="items">
+          {filteredItems.map((item, index) => {
+            return (
+              <div key={index}>
+                <Item item={item} />
+              </div>
+            );
+          })}
+        </div>
       </center>
     </div>
   );

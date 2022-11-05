@@ -58,13 +58,15 @@ export default function MyProd() {
           />
         </div>
         <br />
-        {filteredItems.map((item, index) => {
-          return (
-            <div key={index}>
-              <EditItem item={item} />
-            </div>
-          );
-        })}
+        <div className="items">
+          {filteredItems.map((item, index) => {
+            return (
+              <div key={index}>
+                <EditItem item={item} />
+              </div>
+            );
+          })}
+        </div>
       </center>
     </div>
   );
