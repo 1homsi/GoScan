@@ -122,7 +122,7 @@ export default class Register extends React.Component {
               style={{
                 width: window.innerWidth > 600 ? "30%" : "40%",
                 justifySelf: "center",
-                backgroundColor: "#f50057",
+                backgroundColor: "#339476",
               }}
               
               variant="contained"

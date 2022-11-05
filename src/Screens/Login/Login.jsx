@@ -2,6 +2,7 @@ import React from "react";
 import { auth, firebase } from "../../firebase";
 import { TextField, Button } from "@mui/material";
 import "./Login.css";
+import { fontWeight } from "@mui/system";
 
 
 export default class Login extends React.Component {
@@ -38,6 +39,16 @@ export default class Login extends React.Component {
       });
     this.props.navigate("/");
   };
+
+  handleResetPassword = () => {
+    auth.sendPasswordResetEmail(this.state.email).then(function() {
+     alert("kindly check your inbox")
+    }).catch(function(error) {
+      alert(error.message)
+    });
+  }
+
+
 
   render() {
     return (
@@ -101,7 +112,7 @@ export default class Login extends React.Component {
               style={{
                 width: window.innerWidth > 600 ? "20%" : "40%",
                 justifySelf: "center",
-                backgroundColor: "#f50057",
+                backgroundColor: "#339476",
               }}
               variant="contained"
               onClick={() => this.handleLogin()}
@@ -124,6 +135,20 @@ export default class Login extends React.Component {
               back
             </Button>
           </div>
+
+          <p
+          style={{
+            marginTop: "10px",
+            cursor: "pointer",
+            fontWeight: "200"
+          }}
+          onClick={ 
+            () => this.handleResetPassword()
+            
+           }
+          >
+            Forgot password? 
+          </p>
           </form>
 
       </div>
