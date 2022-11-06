@@ -89,7 +89,7 @@ export default class Add extends React.Component {
               value={this.state.priceInLBP}
               onChange={(event) => {
                 this.setState({
-                  priceInLBP: this.state.priceInLBP + 1000,
+                  priceInLBP: event.target.value,
                 });
               }}
             />
@@ -101,7 +101,7 @@ export default class Add extends React.Component {
             }}
           >
             <TextField
-              required
+              
               fullWidth
               label="Price in USD"
               type="number"
@@ -141,7 +141,6 @@ export default class Add extends React.Component {
             }}
           >
             <TextField
-              required
               fullWidth
               label="Description"
               value={this.state.description}

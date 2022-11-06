@@ -20,8 +20,8 @@ export default function EditItem({ item }) {
       <div>
         <img src={item.image} alt={item.title} className="imageItem" />
         <h1>{item.name}</h1>
-        <p className="price">{item.price}$</p>
-        <p className="price">{item.priceInLBP}lbp</p>
+        <p className="price">USD: {item.price === 0 ? "N/A" : item.price}</p>
+        <p className="price">{item.priceInLBP} LBP</p>
         <p>{item.description}</p>
       </div>
 

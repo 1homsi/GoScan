@@ -144,7 +144,6 @@ export default class Login extends React.Component {
           }}
           onClick={ 
             () => this.handleResetPassword()
-            
            }
           >
             Forgot password? 
