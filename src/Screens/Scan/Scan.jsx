@@ -24,7 +24,7 @@ export default function Scan() {
         height={300}
         onUpdate={(err, result) => {
           if (result) {
-            navigation(`/scanned/${id}/${result.text}`);
+            navigation(`/scanned/${id}/${result}`);
           } else setData("Not Found");
         }}
       />

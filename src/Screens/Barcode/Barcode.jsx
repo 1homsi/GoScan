@@ -39,6 +39,7 @@ export default function BarcodeScreen() {
       <div ref={printRef}>
         <Barcode value={id} />
       </div>
+      
       <button
         style={{
           marginTop: "20px",

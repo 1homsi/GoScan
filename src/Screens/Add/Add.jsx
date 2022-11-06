@@ -54,7 +54,7 @@ export default class Add extends React.Component {
           db.collection("Shops")
             .doc(auth.currentUser.uid)
             .collection("Items")
-            .doc()
+            .doc(barcode)
             .set({
               name: name,
               priceInLBP: priceInLBP,

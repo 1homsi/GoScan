@@ -2,12 +2,15 @@ import React from "react";
 import "./Item.css";
 import { auth, db } from "../../firebase";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 
 export default function ScannedItem() {
-  const { shop, id } = useParams();
+  const { shop, id } = useParams(); 
   const [item, setItem] = React.useState({});
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState(false);
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     fetchItem();
@@ -29,6 +32,7 @@ export default function ScannedItem() {
         }
       });
   };
+  
 
   return (
     <div
@@ -41,6 +45,26 @@ export default function ScannedItem() {
         width: "100vw",
       }}
     >
+
+
+      <button
+      style={{
+        backgroundColor: "#fff",
+        color: "#000",
+        padding: 10,
+        borderRadius: 10,
+        border: "none",
+        outline: "none",
+        cursor: "pointer",
+      }}
+      onClick={() => {
+        navigate(-1);
+      }}
+
+      >
+        Scan Again
+      </button>
+
       <div className="item">
         <div className="card">
           <img src={item.image} alt={item.title} className="imageItem" />
@@ -50,6 +74,7 @@ export default function ScannedItem() {
           <p>{item.description}</p>
         </div>
       </div>
+
     </div>
   );
 }
