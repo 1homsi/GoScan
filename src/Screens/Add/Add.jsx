@@ -1,6 +1,7 @@
 import React from "react";
 import { db, auth, storage } from "../../firebase";
 import { Button, TextField } from "@mui/material";
+import BarcodeScannerComponent from "react-qr-barcode-scanner";
 import "./Add.css";
 
 export default class Add extends React.Component {
@@ -8,17 +9,36 @@ export default class Add extends React.Component {
     super(props);
     this.state = {
       name: "",
+      barcode: "",
       priceInLBP: 0,
       PriceInUSD: 0,
       quantity: 0,
       description: "",
       image: {},
+      uid: auth.currentUser.uid,
     };
     this.handleAdd = this.handleAdd.bind(this);
   }
 
+  handleScan () {
+    return (
+    <BarcodeScannerComponent
+                facingMode="environment"
+                width={500}
+                height={300}
+                onUpdate={(err, result) => {
+                  if (result) {
+                    this.setState({
+                      barcode: result.text,
+                    });
+                  }
+                }}
+              />
+    )
+  }
+
   handleAdd() {
-    const { name, priceInLBP, PriceInUSD, quantity, description } = this.state;
+    const { name, priceInLBP, barcode , uid, PriceInUSD, quantity, description } = this.state;
     const uploadTask = storage
       .ref(`/images/${this.state.image.name}`)
       .put(this.state.image);
@@ -39,6 +59,7 @@ export default class Add extends React.Component {
               name: name,
               priceInLBP: priceInLBP,
               price: PriceInUSD,
+              barcode: barcode,
               quantity: quantity,
               description: description,
               image: downloadURL,
@@ -55,6 +76,8 @@ export default class Add extends React.Component {
     return (
       <div className="AddContainer">
         <h1>Add Product</h1>
+       
+
         <form className="Form">
           <div
             className="Name"
@@ -62,6 +85,8 @@ export default class Add extends React.Component {
               marginTop: "10px",
             }}
           >
+                    
+
             <TextField
               required
               fullWidth
@@ -93,6 +118,41 @@ export default class Add extends React.Component {
                 });
               }}
             />
+          </div>
+          <div
+            className="Price"
+            style={{
+              marginTop: "10px",
+              display: "flex",
+              flexDirection: "column-reverse",
+              justifyContent: "space-between",
+            }}
+          >
+            <TextField
+              required
+              fullWidth
+              label="Bar Code"
+              defaultValue={0}
+              value={this.state.barcode}
+              onChange={(event) => {
+                this.setState({
+                  priceInLBP: event.target.value,
+                });
+              }}
+            />
+            <BarcodeScannerComponent
+                facingMode="environment"
+                width={300}
+                height={200}
+                onUpdate={(err, result) => {
+                  if (result) {
+                    this.setState({
+                      barcode: result.text,
+                    });
+                    
+                  }
+                }}
+              />
           </div>
           <div
             className="Price"
