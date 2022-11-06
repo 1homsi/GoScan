@@ -44,6 +44,8 @@ export default function MyProd() {
     <div className="main">
       <center>
         <div>
+          <h1>My Products</h1>
+
           <input
             style={{
               width: "80%",
@@ -67,6 +69,16 @@ export default function MyProd() {
             }}
           />
         </div>
+        <br />
+        <button
+        onClick={
+          () => {
+            navigation(`/qr/${id}`); 
+          }
+        }
+        >
+          My QR code
+        </button>
         <br />
         <div className="items">
           {filteredItems.map((item, index) => {

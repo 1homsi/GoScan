@@ -14,6 +14,7 @@ import MyProd from "./Screens/MyProducts/MyProd";
 import BarcodeScreen from "./Screens/Barcode/Barcode";
 import ScannedItem from "./Screens/ScannedItem/ScannedItem";
 import Scan from "./Screens/Scan/Scan";
+import QR from "./Screens/qrcode/qr";
 
 export default function App() {
   let navigate = useNavigate();
@@ -23,7 +24,7 @@ export default function App() {
     <div>
       <NavBar navigate={navigate} />
       <Routes>
-        <Route index element={<Intro navigate={navigate} />} />
+        {/* <Route index element={<Intro navigate={navigate} />} />
         <Route
           path="/shop/:id"
           element={<Home navigate={navigate} user={user?.displayName} />}
@@ -31,18 +32,19 @@ export default function App() {
         <Route path="/login" element={<Login navigate={navigate} />} />
         <Route path="/myitems/:id" element={<MyProd navigate={navigate} />} />
         <Route path="/scanned/:shop/:id" element={<ScannedItem />} />
-        <Route path="/barcode/:id" element={<BarcodeScreen />} />
+        <Route path="/barcode/:id" element={<BarcodeScreen />} /> */}
         {/* {
           user &&
             user.email === "homsimohamad17@gmail.com" ? (
             <> */}
-        <Route path="/register" element={<Register navigate={navigate} />} />
+        <Route index element={<Register navigate={navigate} />} />
         {/* </>
           ) : <></>
         } */}
-        <Route path="/add" element={<Add navigate={navigate} />} />
+        {/* <Route path="/add" element={<Add navigate={navigate} />} />
         <Route path="/scan/:id" element={<Scan />} />
         <Route path="/edit/:id" element={<Edit navigate={navigate} />} />
+        <Route path="/qr/:id" element={<QR />} /> */}
       </Routes>
     </div>
   );

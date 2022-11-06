@@ -36,7 +36,7 @@ export default class Register extends React.Component {
       .catch((error) => {
         alert(error.message);
       });
-    this.props.navigate("/");
+    window.location.reload();
   };
 
   render() {

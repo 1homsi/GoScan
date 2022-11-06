@@ -49,8 +49,8 @@ export default function ScannedItem() {
 
       <button
       style={{
-        backgroundColor: "#fff",
-        color: "#000",
+        backgroundColor: "#339476",
+        color: "#ffff",
         padding: 10,
         borderRadius: 10,
         border: "none",
