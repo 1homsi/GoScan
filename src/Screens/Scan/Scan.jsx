@@ -21,7 +21,7 @@ export default function Scan() {
       <BarcodeScannerComponent
         facingMode="environment"
         width={500}
-        height={300}
+        height={500}
         onUpdate={(err, result) => {
           if (result) {
             navigation(`/scanned/${id}/${result}`);

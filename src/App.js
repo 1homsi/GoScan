@@ -24,7 +24,7 @@ export default function App() {
     <div>
       <NavBar navigate={navigate} />
       <Routes>
-        {/* <Route index element={<Intro navigate={navigate} />} />
+        <Route index element={<Intro navigate={navigate} />} />
         <Route
           path="/shop/:id"
           element={<Home navigate={navigate} user={user?.displayName} />}
@@ -32,19 +32,19 @@ export default function App() {
         <Route path="/login" element={<Login navigate={navigate} />} />
         <Route path="/myitems/:id" element={<MyProd navigate={navigate} />} />
         <Route path="/scanned/:shop/:id" element={<ScannedItem />} />
-        <Route path="/barcode/:id" element={<BarcodeScreen />} /> */}
-        {/* {
-          user &&
+        <Route path="/barcode/:id" element={<BarcodeScreen />} />
+
+        {/* user &&
             user.email === "homsimohamad17@gmail.com" ? (
             <> */}
-        <Route index element={<Register navigate={navigate} />} />
+        {/* <Route index element={<Register navigate={navigate} />} /> */}
         {/* </>
           ) : <></>
         } */}
-        {/* <Route path="/add" element={<Add navigate={navigate} />} />
+        <Route path="/add" element={<Add navigate={navigate} />} />
         <Route path="/scan/:id" element={<Scan />} />
         <Route path="/edit/:id" element={<Edit navigate={navigate} />} />
-        <Route path="/qr/:id" element={<QR />} /> */}
+        <Route path="/qr/:id" element={<QR />} />
       </Routes>
     </div>
   );
